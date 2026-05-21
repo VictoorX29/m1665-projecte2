@@ -2,12 +2,24 @@
 
 Aplicació web per recollir respostes d'enquesta de satisfacció (grup, puntuació 1–5, comentari opcional) i mostrar un panell d'analítica amb filtres, KPIs i gràfics.
 
+## Desplegament (Vercel)
+
+L'aplicació està publicada a Vercel des de la branca `main`:
+
+**[https://m1665-projecte2.vercel.app](https://m1665-projecte2.vercel.app)**
+
+Repositori: [github.com/VictoorX29/m1665-projecte2](https://github.com/VictoorX29/m1665-projecte2)
+
 ## Requisits
 
 - Navegador modern amb suport per a ES6+, `<template>` i `conic-gradient` (CSS)
 - No cal instal·lar dependències: el projecte és HTML, CSS i JavaScript vanilla
 
 ## Execució
+
+**En línia:** obre [https://m1665-projecte2.vercel.app](https://m1665-projecte2.vercel.app), omple el formulari i consulta el panell.
+
+**En local:**
 
 1. Clona o descarrega el repositori.
 2. Obre `index.html` directament al navegador, **o** serveix la carpeta amb un servidor local:
@@ -36,9 +48,9 @@ npx serve .
 |------|-------|-----------------|-------|
 | A — Formulari i validació | IA4 | `PartA-Formulari` | **Completada** |
 | B — Panell d'analítica | IA4 | `PartB---Panell-d'analitica` | **Completada** |
-| C — Cloud (Git + Vercel) | IA3 | `PartC---Cloud` (o `dev` → `main`) | **Pendent** |
+| C — Cloud (Git + Vercel) | IA3 | `PartC-Cloud` | **Completada** |
 | D — Base de dades Supabase | IA5 | `PartD---Supabase` | **Pendent** |
-| Integració | — | `main` | Inclou Part A via PR; Parts B–D per integrar |
+| Producció | — | `main` | Desplegada a Vercel; integra Parts A i B |
 
 ## Part A — completada
 
@@ -61,15 +73,15 @@ La branca `PartB---Panell-d'analitica` afegeix el panell d'analítica sobre les 
 
 El panell s'actualitza en guardar una resposta o en canviar el filtre (`initPanell()` + `actualitzarPanell()`).
 
-## Part C — pendent (Cloud, IA3)
+## Part C — completada (Cloud, IA3)
 
-Objectiu: publicar l'aplicació i organitzar el flux Git del equip.
+La branca `PartC-Cloud` cobreix la publicació i el flux Git:
 
 - **Repositori GitHub** amb branques `main` (producció) i `dev` (integració)
-- **Pull request** de `dev` cap a `main` amb merge quan les parts estiguin validades
-- **Desplegament a Vercel** des de `main`, amb URL pública que carregui l'app estàtica (`index.html`)
+- **Pull requests** de les parts de funcionalitat cap a `main` (Parts A i B integrades)
+- **Desplegament a Vercel** des de `main`: app estàtica (`index.html`) accessible a [https://m1665-projecte2.vercel.app](https://m1665-projecte2.vercel.app)
 
-> Fins que no es completi la Part C, l'app només es pot provar en local; les dades segueixen en memòria (IA4).
+> Les dades continuen en memòria del navegador (IA4); la persistència a Supabase és objectiu de la Part D.
 
 ## Part D — pendent (Base de dades, IA5)
 
@@ -97,7 +109,8 @@ Fitxer previst: `js/supabase.js` per connectar client, escriure i llegir respost
 ## Decisions tècniques
 
 - **Vanilla JS** sense frameworks ni bundler
-- **Dades en memòria (IA4, Parts A–B)**: les respostes es perden en recarregar; la Part D les mourà a Supabase
+- **Hosting estàtic a Vercel**: sense build; serveix directament HTML, CSS i JS
+- **Dades en memòria (IA4, Parts A–C)**: les respostes es perden en recarregar; la Part D les mourà a Supabase
 - **Separació de mòduls**: `app.js` coordina `initFormulari()`, `initPanell()` i la primera crida a `actualitzarPanell()`
 - **Gràfics sense llibreries**: barres amb amplada en %; quesitos amb `conic-gradient` construït des de comptadors
 
