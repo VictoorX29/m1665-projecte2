@@ -1,5 +1,5 @@
 # Ignore local config with keys
-# js/config.js
+js/config.js
 
 # macOS
 .DS_Store
