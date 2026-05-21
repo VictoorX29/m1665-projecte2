@@ -22,33 +22,34 @@ npx serve .
 
 | Fitxer / carpeta | Rol |
 |------------------|-----|
-| `index.html` | Interfície: formulari d'enquesta i panell d'analítica |
-| `css/styles.css` | Estils de la pàgina, targetes, KPIs i gràfics |
+| `index.html` | Interfície: formulari d'enquesta i panell (Part A) |
+| `css/styles.css` | Estils de la pàgina, targetes i llista de respostes |
 | `js/app.js` | Estat global (`respostes`), grups vàlids i validació de puntuació |
 | `js/formulari.js` | Captura, validació i desament de respostes |
-| `js/panell.js` | Actualització del panell (KPIs, llista d'últimes respostes) |
+| `js/panell.js` | Comptador de respostes per grup i llista de les 5 últimes |
 
 ## Parts del projecte
 
 | Part | Rama | Estat |
 |------|------|-------|
-| A — Formulari i validació | `PartA-Formulari` | En curs |
-| A — (remot) | `origin/PartA` | Referència remota |
-| Integració / lliurament | `main` | Base del repositori |
+| A — Formulari, validació i panell bàsic | `PartA-Formulari` | **Completada** |
+| B — Panell d'analítica avançat | `main` (futura) | Pendent |
+| Referència remota | `origin/PartA` | Aliniada amb Part A |
 
-## Estat actual
+## Part A — completada
 
-**Implementat**
+La branca `PartA-Formulari` inclou tot el que demana la Part A:
 
-- Formulari amb selecció de grup (DAW1A, DAW1B, ASIX1), puntuació 1–5 i comentari opcional
-- Validació de grup i puntuació amb missatges d'error
-- Emmagatzematge de respostes en memòria (`respostes` a `app.js`)
-- Panell: filtre sincronitzat amb el grup del formulari, KPI de nombre de respostes i llista de les 5 últimes respostes del grup
+- **Formulari**: selecció de grup (DAW1A, DAW1B, ASIX1), puntuació 1–5 i comentari opcional
+- **Validació**: grup vàlid i puntuació enter entre 1 i 5, amb missatges d'error visibles
+- **Desament**: cada resposta es guarda en memòria amb `id`, `grup`, `puntuació`, `comentari` i `data` (ISO)
+- **Panell**: text del grup actiu del formulari, comptador de respostes del grup i llista de les **5 últimes** respostes (plantilla `<template>`), ordenades per data
 
-**Pendent / placeholder**
+## Properes parts (pendent)
 
-- KPIs de mitjana i % positives (es mostren com a «—»)
-- Gràfics de barres, quesito i comparativa per grup al HTML (valors estàtics de disseny; cal connectar-los a les dades reals en parts posteriors)
+- KPIs addicionals (mitjana, % positives, etc.)
+- Gràfics (barres, quesito, comparativa per grup)
+- Filtres i analítica completa del panell
 
 ## Decisions tècniques
 
