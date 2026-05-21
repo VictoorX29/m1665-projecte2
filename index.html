@@ -41,12 +41,97 @@
 
     <section class="card card--panel">
       <h2>Panell d'analítica</h2>
-      <p id="hint-grup" class="hint-grup">Grup del formulari: DAW1A</p>
-      <p class="panell-resum">
-        Respostes guardades: <strong id="kpi-respostes">0</strong>
-      </p>
-      <h3>Últimes respostes</h3>
-      <div id="llista-respostes" class="llista-respostes"></div>
+
+      <div class="field field--filter">
+        <label for="filtre-panel">Filtre del panell</label>
+        <select id="filtre-panel">
+          <option value="Tots">Tots</option>
+          <option value="DAW1A">DAW1A</option>
+          <option value="DAW1B">DAW1B</option>
+          <option value="ASIX1">ASIX1</option>
+        </select>
+        <p id="hint-filtre" class="hint-filtre">Mostrant dades del filtre: Tots</p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Respostes</span>
+          <span id="kpi-respostes" class="kpi-value">0</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Mitjana</span>
+          <span id="kpi-mitjana" class="kpi-value">—</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">% 4 o 5</span>
+          <span id="kpi-positives" class="kpi-value">—</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Grup analitzat</span>
+          <span id="kpi-grup" class="kpi-value">Tots</span>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <h3>Distribució de valoracions</h3>
+        <div class="bar-chart">
+          <div class="bar-row" id="bar-5">
+            <span class="bar-label">5 estrelles</span>
+            <div class="bar-track"><div class="bar-fill"></div></div>
+            <span class="bar-count">0</span>
+          </div>
+          <div class="bar-row" id="bar-4">
+            <span class="bar-label">4 estrelles</span>
+            <div class="bar-track"><div class="bar-fill"></div></div>
+            <span class="bar-count">0</span>
+          </div>
+          <div class="bar-row" id="bar-3">
+            <span class="bar-label">3 estrelles</span>
+            <div class="bar-track"><div class="bar-fill"></div></div>
+            <span class="bar-count">0</span>
+          </div>
+          <div class="bar-row" id="bar-2">
+            <span class="bar-label">2 estrelles</span>
+            <div class="bar-track"><div class="bar-fill"></div></div>
+            <span class="bar-count">0</span>
+          </div>
+          <div class="bar-row" id="bar-1">
+            <span class="bar-label">1 estrella</span>
+            <div class="bar-track"><div class="bar-fill"></div></div>
+            <span class="bar-count">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <h3>Gràfics de quesito</h3>
+        <div class="pies-grid">
+          <div class="pie-block">
+            <p class="pie-title">Quesito de puntuacions</p>
+            <div class="pie-layout">
+              <div id="pie-scores" class="pie-chart" aria-hidden="true"></div>
+              <ul id="legend-scores" class="pie-legend"></ul>
+            </div>
+          </div>
+          <div class="pie-block">
+            <p class="pie-title">Quesito positives (4-5)</p>
+            <div class="pie-layout">
+              <div id="pie-positives" class="pie-chart" aria-hidden="true"></div>
+              <ul id="legend-positives" class="pie-legend"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-block">
+        <h3>Comparativa de mitjana per grup</h3>
+        <div id="compare-chart" class="compare-chart"></div>
+      </div>
+
+      <div class="panel-block">
+        <h3>Respostes del filtre</h3>
+        <div id="llista-respostes" class="llista-respostes"></div>
+      </div>
     </section>
   </main>
 
@@ -55,6 +140,7 @@
       <span class="badge-grup"></span>
       <p class="resposta-puntuacio"></p>
       <p class="resposta-comentari"></p>
+      <p class="resposta-data"></p>
     </article>
   </template>
 

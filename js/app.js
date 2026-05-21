@@ -18,5 +18,6 @@ window.App = {
 
 document.addEventListener("DOMContentLoaded", () => {
   initFormulari();
+  initPanell();
   actualitzarPanell();
 });
