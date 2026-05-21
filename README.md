@@ -1,10 +1,10 @@
 # Projecte d'Enquesta de l'aula — M1665 Projecte 2
 
-Aplicació web per recollir respostes d'enquesta de satisfacció (grup, puntuació 1–5, comentari opcional) i mostrar un panell d'analítica filtrat per grup.
+Aplicació web per recollir respostes d'enquesta de satisfacció (grup, puntuació 1–5, comentari opcional) i mostrar un panell d'analítica amb filtres, KPIs i gràfics.
 
 ## Requisits
 
-- Navegador modern amb suport per a ES6+ i `<template>`
+- Navegador modern amb suport per a ES6+, `<template>` i `conic-gradient` (CSS)
 - No cal instal·lar dependències: el projecte és HTML, CSS i JavaScript vanilla
 
 ## Execució
@@ -17,45 +17,89 @@ npx serve .
 ```
 
 3. Omple el formulari i prem **Guardar resposta** per afegir dades en memòria.
+4. Canvia el **Filtre del panell** (Tots o un grup concret) per veure l'analítica actualitzada.
 
 ## Estructura del repositori
 
 | Fitxer / carpeta | Rol |
 |------------------|-----|
-| `index.html` | Interfície: formulari d'enquesta i panell (Part A) |
-| `css/styles.css` | Estils de la pàgina, targetes i llista de respostes |
-| `js/app.js` | Estat global (`respostes`), grups vàlids i validació de puntuació |
+| `index.html` | Formulari d'enquesta i panell d'analítica complet |
+| `css/styles.css` | Estils: targetes, KPIs, barres, quesitos i comparativa |
+| `js/app.js` | Estat global (`respostes`), grups vàlids i validació |
 | `js/formulari.js` | Captura, validació i desament de respostes |
-| `js/panell.js` | Comptador de respostes per grup i llista de les 5 últimes |
+| `js/panell.js` | Filtre, KPIs, gràfics, comparativa i llista de respostes |
+| `js/supabase.js` | *(Part D, pendent)* Client Supabase: insert i select de respostes |
 
 ## Parts del projecte
 
-| Part | Rama | Estat |
-|------|------|-------|
-| A — Formulari, validació i panell bàsic | `PartA-Formulari` | **Completada** |
-| B — Panell d'analítica avançat | `main` (futura) | Pendent |
-| Referència remota | `origin/PartA` | Aliniada amb Part A |
+| Part | Àmbit | Rama (prevista) | Estat |
+|------|-------|-----------------|-------|
+| A — Formulari i validació | IA4 | `PartA-Formulari` | **Completada** |
+| B — Panell d'analítica | IA4 | `PartB---Panell-d'analitica` | **Completada** |
+| C — Cloud (Git + Vercel) | IA3 | `PartC---Cloud` (o `dev` → `main`) | **Pendent** |
+| D — Base de dades Supabase | IA5 | `PartD---Supabase` | **Pendent** |
+| Integració | — | `main` | Inclou Part A via PR; Parts B–D per integrar |
 
 ## Part A — completada
 
-La branca `PartA-Formulari` inclou tot el que demana la Part A:
+Inclou la base del projecte (branca `PartA-Formulari`):
 
-- **Formulari**: selecció de grup (DAW1A, DAW1B, ASIX1), puntuació 1–5 i comentari opcional
-- **Validació**: grup vàlid i puntuació enter entre 1 i 5, amb missatges d'error visibles
-- **Desament**: cada resposta es guarda en memòria amb `id`, `grup`, `puntuació`, `comentari` i `data` (ISO)
-- **Panell**: text del grup actiu del formulari, comptador de respostes del grup i llista de les **5 últimes** respostes (plantilla `<template>`), ordenades per data
+- **Formulari**: grup (DAW1A, DAW1B, ASIX1), puntuació 1–5 i comentari opcional
+- **Validació**: grup vàlid i puntuació enter entre 1 i 5, amb missatges d'error
+- **Desament**: respostes en memòria amb `id`, `grup`, `puntuació`, `comentari` i `data` (ISO)
 
-## Properes parts (pendent)
+## Part B — completada
 
-- KPIs addicionals (mitjana, % positives, etc.)
-- Gràfics (barres, quesito, comparativa per grup)
-- Filtres i analítica completa del panell
+La branca `PartB---Panell-d'analitica` afegeix el panell d'analítica sobre les dades guardades:
+
+- **Filtre independent**: selector `Tots` o un grup concret; el panell no depèn del grup seleccionat al formulari
+- **KPIs**: nombre de respostes, mitjana, % de puntuacions 4 o 5 i grup/filtre analitzat
+- **Distribució de valoracions**: gràfic de barres (1–5) amb comptadors i amplada proporcional al màxim
+- **Gràfics de quesito**: distribució per puntuació i repartiment positives (4–5) vs no positives (1–3), amb `conic-gradient` i llegenda dinàmica
+- **Comparativa**: mitjana per grup (DAW1A, DAW1B, ASIX1) amb barres; ressalta el grup si el filtre coincideix
+- **Llista de respostes**: totes les del filtre actiu, ordenades per data (més recents primer), amb data formatada (`ca-ES`) i estil per puntuació
+
+El panell s'actualitza en guardar una resposta o en canviar el filtre (`initPanell()` + `actualitzarPanell()`).
+
+## Part C — pendent (Cloud, IA3)
+
+Objectiu: publicar l'aplicació i organitzar el flux Git del equip.
+
+- **Repositori GitHub** amb branques `main` (producció) i `dev` (integració)
+- **Pull request** de `dev` cap a `main` amb merge quan les parts estiguin validades
+- **Desplegament a Vercel** des de `main`, amb URL pública que carregui l'app estàtica (`index.html`)
+
+> Fins que no es completi la Part C, l'app només es pot provar en local; les dades segueixen en memòria (IA4).
+
+## Part D — pendent (Base de dades, IA5)
+
+Objectiu: persistir les respostes a Supabase mantenint la mateixa interfície.
+
+- **Taula `respostes`** a Supabase: `grup`, `puntuació`, `comentari`, `data` (i `id` de la BD)
+- **Formulari**: `insert` a Supabase en lloc d'afegir només a l'array en memòria
+- **Panell**: lectura des de Supabase (càrrega inicial i després de cada guardat)
+- **Conclusions**: text breu (5–8 línies) amb **2 conclusions** llegint les dades reals del projecte
+
+Estructura de dada (sense canvis al front):
+
+```json
+{
+  "id": 1,
+  "grup": "DAW1A",
+  "puntuacio": 4,
+  "comentari": "Tot clar",
+  "data": "2026-05-21T10:00:00"
+}
+```
+
+Fitxer previst: `js/supabase.js` per connectar client, escriure i llegir respostes.
 
 ## Decisions tècniques
 
 - **Vanilla JS** sense frameworks ni bundler
-- **Dades en memòria**: les respostes es perden en recarregar la pàgina (sense `localStorage` ni backend)
-- **Mòduls per fitxer**: `app.js` exposa `window.App` i coordina `initFormulari()` i `actualitzarPanell()` al `DOMContentLoaded`
+- **Dades en memòria (IA4, Parts A–B)**: les respostes es perden en recarregar; la Part D les mourà a Supabase
+- **Separació de mòduls**: `app.js` coordina `initFormulari()`, `initPanell()` i la primera crida a `actualitzarPanell()`
+- **Gràfics sense llibreries**: barres amb amplada en %; quesitos amb `conic-gradient` construït des de comptadors
 
 ## Autoria
 

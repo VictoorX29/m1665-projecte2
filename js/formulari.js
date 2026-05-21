@@ -1,9 +1,6 @@
 function initFormulari() {
   const btnGuardar = document.getElementById("btn-guardar");
-  const selectGrup = document.getElementById("grup");
-
   btnGuardar.addEventListener("click", guardarResposta);
-  selectGrup.addEventListener("change", actualitzarPanell);
 }
 
 function mostrarError(missatge) {
