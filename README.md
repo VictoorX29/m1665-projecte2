@@ -44,13 +44,13 @@ npx serve .
 
 ## Parts del projecte
 
-| Part                       | Àmbit | Rama (prevista)              | Estat                                    |
-| -------------------------- | ----- | ---------------------------- | ---------------------------------------- |
-| A — Formulari i validació  | IA4   | `PartA-Formulari`            | **Completada**                           |
-| B — Panell d'analítica     | IA4   | `PartB---Panell-d'analitica` | **Completada**                           |
-| C — Cloud (Git + Vercel)   | IA3   | `PartC-Cloud`                | **Completada**                           |
-| D — Base de dades Supabase | IA5   | `PartD---Supabase`           | **Pendent**                              |
-| Producció                  | —     | `main`                       | Desplegada a Vercel; integra Parts A i B |
+| Part                       | Àmbit | Rama (prevista)              | Estat                                                                |
+| -------------------------- | ----- | ---------------------------- | -------------------------------------------------------------------- |
+| A — Formulari i validació  | IA4   | `PartA-Formulari`            | **Completada**                                                       |
+| B — Panell d'analítica     | IA4   | `PartB---Panell-d'analitica` | **Completada**                                                       |
+| C — Cloud (Git + Vercel)   | IA3   | `PartC-Cloud`                | **Completada**                                                       |
+| D — Base de dades Supabase | IA5   | `PartD---Supabase`           | **Completada**                                                       |
+| Producció                  | —     | `main`                       | Desplegada a Vercel i base de dades en Supabase; integra Parts A i B |
 
 ## Part A — completada
 
@@ -83,7 +83,7 @@ La branca `PartC-Cloud` cobreix la publicació i el flux Git:
 
 > Les dades continuen en memòria del navegador (IA4); la persistència a Supabase és objectiu de la Part D.
 
-## Part D — pendent (Base de dades, IA5)
+## Part D — completada (Base de dades, IA5)
 
 Objectiu: persistir les respostes a Supabase mantenint la mateixa interfície.
 
