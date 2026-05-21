@@ -33,24 +33,24 @@ npx serve .
 
 ## Estructura del repositori
 
-| Fitxer / carpeta | Rol |
-|------------------|-----|
-| `index.html` | Formulari d'enquesta i panell d'analítica complet |
-| `css/styles.css` | Estils: targetes, KPIs, barres, quesitos i comparativa |
-| `js/app.js` | Estat global (`respostes`), grups vàlids i validació |
-| `js/formulari.js` | Captura, validació i desament de respostes |
-| `js/panell.js` | Filtre, KPIs, gràfics, comparativa i llista de respostes |
-| `js/supabase.js` | *(Part D, pendent)* Client Supabase: insert i select de respostes |
+| Fitxer / carpeta  | Rol                                                               |
+| ----------------- | ----------------------------------------------------------------- |
+| `index.html`      | Formulari d'enquesta i panell d'analítica complet                 |
+| `css/styles.css`  | Estils: targetes, KPIs, barres, quesitos i comparativa            |
+| `js/app.js`       | Estat global (`respostes`), grups vàlids i validació              |
+| `js/formulari.js` | Captura, validació i desament de respostes                        |
+| `js/panell.js`    | Filtre, KPIs, gràfics, comparativa i llista de respostes          |
+| `js/supabase.js`  | _(Part D, pendent)_ Client Supabase: insert i select de respostes |
 
 ## Parts del projecte
 
-| Part | Àmbit | Rama (prevista) | Estat |
-|------|-------|-----------------|-------|
-| A — Formulari i validació | IA4 | `PartA-Formulari` | **Completada** |
-| B — Panell d'analítica | IA4 | `PartB---Panell-d'analitica` | **Completada** |
-| C — Cloud (Git + Vercel) | IA3 | `PartC-Cloud` | **Completada** |
-| D — Base de dades Supabase | IA5 | `PartD---Supabase` | **Pendent** |
-| Producció | — | `main` | Desplegada a Vercel; integra Parts A i B |
+| Part                       | Àmbit | Rama (prevista)              | Estat                                    |
+| -------------------------- | ----- | ---------------------------- | ---------------------------------------- |
+| A — Formulari i validació  | IA4   | `PartA-Formulari`            | **Completada**                           |
+| B — Panell d'analítica     | IA4   | `PartB---Panell-d'analitica` | **Completada**                           |
+| C — Cloud (Git + Vercel)   | IA3   | `PartC-Cloud`                | **Completada**                           |
+| D — Base de dades Supabase | IA5   | `PartD---Supabase`           | **Pendent**                              |
+| Producció                  | —     | `main`                       | Desplegada a Vercel; integra Parts A i B |
 
 ## Part A — completada
 
@@ -96,15 +96,23 @@ Estructura de dada (sense canvis al front):
 
 ```json
 {
-  "id": 1,
-  "grup": "DAW1A",
-  "puntuacio": 4,
-  "comentari": "Tot clar",
-  "data": "2026-05-21T10:00:00"
+	"id": 1,
+	"grup": "DAW1A",
+	"puntuacio": 4,
+	"comentari": "Tot clar",
+	"data": "2026-05-21T10:00:00"
 }
 ```
 
 Fitxer previst: `js/supabase.js` per connectar client, escriure i llegir respostes.
+
+### Notes per Part D (configuració i desplegament)
+
+- Copia `js/config.example.js` a `js/config.js` i omple `SUPABASE_URL` i `SUPABASE_ANON_KEY` (anon public key). No commitis `js/config.js`.
+- `.gitignore` inclou `js/config.js` per evitar fuites de claus.
+- Crear el projecte Supabase, executar `supabase/schema.sql` al SQL Editor i configurar RLS (polítiques d'insert/select per `anon`).
+- L'aplicació utilitza la CDN de `@supabase/supabase-js` i `js/supabase.js` per a `insert` i `select`.
+- Per desplegar a Vercel: defineix les variables d'entorn en el dashboard i genera `js/config.js` en build o inclou un petit script de deploy que creï el fitxer.
 
 ## Decisions tècniques
 
